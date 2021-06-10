@@ -32,7 +32,11 @@ class MyApp extends StatelessWidget {
                    margin: EdgeInsets.symmetric(horizontal: 30.w),
                child: Column(
                  children: <Widget>[
-                   swiper()
+                   SizedBox(
+                     height: 3.h,
+                   ),
+                   swiper(),
+                   notice()
                  ],
                )
              )
@@ -42,14 +46,57 @@ class MyApp extends StatelessWidget {
   }
   // 轮播图
   Widget swiper (){
-     return Swiper(
+    return Container(
+      width: double.infinity,
+      height: 260.h,
+      child: Swiper(
        itemBuilder: ( BuildContext context,int index){
-         return Image.network("http://via.placeholder.com/350x150",fit:BoxFit.fill);
-
-       },
+         return new Image.network(
+        "https://via.placeholder.com/690x260",
+        fit: BoxFit.fill,
+        );
+        },
        itemCount: 3,
+       autoplay: true,
+       autoplayDelay: 4000,
        pagination:SwiperPagination(),
-        control: SwiperControl(),
-     );
+     )
+    );
+  }
+  // 通知
+  Widget notice (){
+    return Container(
+      width: double.infinity,
+      height: 38.h,
+      margin: EdgeInsets.symmetric(vertical:20.h),
+      child: Row(
+        crossAxisAlignment:CrossAxisAlignment.center ,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Icon(IconData(0xe61a,fontFamily: "iconfont"),color: Colors.blue),
+          Container(
+            width: 590.w,
+            child: Swiper(
+            itemBuilder: (BuildContext context,int index){
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  SizedBox(width: 15.w,),
+                  Text("$index",style: TextStyle(fontSize: 30.sp)),
+                ],
+              );
+            },
+            itemCount: 4,
+            autoplay: true,
+            autoplayDelay: 4000,
+            scrollDirection: Axis.vertical,
+          ),
+          ),
+          Icon(Icons.chevron_right,color: Color.fromRGBO(0, 0, 0, 0.3),size: 50.sp)
+
+        ],
+      ),
+    );
   }
 }
